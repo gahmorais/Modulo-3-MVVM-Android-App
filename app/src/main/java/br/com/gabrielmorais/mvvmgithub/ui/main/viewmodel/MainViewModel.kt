@@ -1,5 +1,6 @@
 package br.com.gabrielmorais.mvvmgithub.ui.main.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -27,6 +28,7 @@ class MainViewModel(private val mainRepository: MainRepository) : ViewModel() {
         .subscribe({ userList ->
           users.postValue(Resource.success(userList))
         }, { throwable ->
+          Log.i("MainViewModel", "fetchUsers: ${throwable.message}")
           users.postValue(Resource.error("Erro inesperado", null))
         })
     )
